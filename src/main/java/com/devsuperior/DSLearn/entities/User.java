@@ -1,7 +1,9 @@
 package com.devsuperior.DSLearn.entities;
 
+import java.util.ArrayList;
 //import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 //@SuppressWarnings("serial")
@@ -34,7 +37,10 @@ public class User{// implements UserDetails {
 		joinColumns = @JoinColumn(name = "user_id"),
 		inverseJoinColumns = @JoinColumn(name = "role_id"))	
 	private Set<Role> roles = new HashSet<>();
-	
+
+	@OneToMany(mappedBy = "user")
+	private List<Notification> notifications = new ArrayList<>();
+
 	public User() {}
 
 	public User(Long id, String name, String email, String password) {
